@@ -1,0 +1,19 @@
+<div class="field-wrapper">
+  <mat-label class="label">
+    {{ label }}
+    @if (required) {
+      <span class="required">*</span>
+    }</mat-label>
+
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="{{placeholder}}"
+      [formControl]="control"
+      [required]="required || false"
+      (blur)="updateErrorMessage()">
+    @if (control.invalid) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+</div>

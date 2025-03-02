@@ -1,0 +1,24 @@
+<div>
+  <div class="field-wrapper">
+    <mat-label class="label">
+      {{ label }}
+      @if (required) {
+        <span class="required">*</span>
+      }</mat-label>
+
+    <div class="wrap">
+      <mat-checkbox
+        *ngFor="let option of options"
+        [value]="option.value"
+        (change)="onCheckboxChange($event)">
+        {{ option.label }}
+      </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="error">
+    @if (errorMessage()) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+    }
+  </div>
+</div>

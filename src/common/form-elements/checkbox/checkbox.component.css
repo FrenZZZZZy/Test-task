@@ -1,0 +1,13 @@
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-checkbox {
+  flex: 1 1 45%;
+}
+
+.error {
+  padding-left: 150px;
+  font-size: 12px;
+}
