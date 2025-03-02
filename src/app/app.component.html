@@ -1,0 +1,52 @@
+<div class="wrapper">
+
+  <mat-form-field class="json-input">
+    <mat-label>JSON Object</mat-label>
+    <textarea
+      matInput
+      rows="12"
+      placeholder="[{'componentName':'input','label':'Имя','placeholder':'введите имя','fieldName':'name','data': 'some data will be here'}]"
+      [formControl]="settingObject"
+    ></textarea>
+    @if (settingObject.invalid) {
+      <mat-error>{{ errorMessage() }}</mat-error>
+    }
+  </mat-form-field>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+
+    @for (formField of formConfig; track formField.label) {
+      <div class="component">
+        @if (formField.type === 'checkbox') {
+          <app-checkbox
+            [label]="formField.label"
+            [options]="formField.options"
+            [control]="getGroup(formField.fieldName)"
+            [required]="formField.required">
+          </app-checkbox>
+        } @else if (formField.type === 'input') {
+          <app-input-text
+            [label]="formField.label"
+            [placeholder]="formField.placeholder"
+            [control]="getControl(formField.fieldName)"
+            [required]="formField.required">
+          </app-input-text>
+        } @else if (formField.type === 'select') {
+          <app-select
+            [label]="formField.label"
+            [placeholder]="formField.placeholder"
+            [options]="formField.options"
+            [control]="getControl(formField.fieldName)"
+            [required]="formField.required">
+          </app-select>
+        }
+      </div>
+    }
+
+    @if (!isInvalidJSON) {
+      <button mat-flat-button type="submit" (submit)="submitForm()">Submit</button>
+<!--      <button>Отправить</button>-->
+    }
+  </form>
+
+</div>
