@@ -40,7 +40,7 @@ export class CheckboxComponent implements OnChanges {
   }
 
   updateErrorMessage() {
-    if (!this.control.value || !this.control.value.length) {
+    if (this.required && (!this.control.value || !this.control.value.length)) {
       this.errorMessage.set('Please select at least one skill');
     } else {
       this.errorMessage.set('');
